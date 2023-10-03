@@ -1,33 +1,195 @@
 # Iteration - looping
 
-Now we have looked at arrays lets explore how to move through the array in c controlled manner. There are many other uses for iteration (or looping).
+Something a computer is very suited to it repetition. A number of terms are used for this, including:
+
+* Looping
+* Iteration
+* Recursing
+
+There are many uses for iteration and it is something that is common to almost every computer language.
+
+> Iteration is so fundamental to computer programming, you will find that at machine code level, there are special instructions to support it.
+>
+> Applications that require the same set of operations to be repeated millions (or billions) of times are often very sensitive to small inefficiencies. Examples  include those used in media processing, encryption, AI and game physics. 
+>
+> Iteration in the C and C++ languages are easily compiled and optimised into efficient machine code, which is partly what makes them so efficient. Iteration is often a lot slower in interpreted languages such as Python and functional languages such as Haskell.
+
+The good news is that the language syntax (programming language grammar) is almost identical in C, C++, Java and C# (to name just some examples). Many languages have syntax that derives from C. They all tend to borrow ideas from each other.
+
+## Do-While loop
+
+In the lecture we started with the `do-while` loop. Perform the following tasks. Hover the mouse over any questions to see the answers.
+
+| TASK | 201-dowhile-loops |
+| - | - |
+| 1 | Open the solution file in the folder 02 - Iteration |
+| 2 | Make project 201-dowhile-loops the start up project |  
+| 3 | Build, set a breakpoint and step through the code to see what it does |
+| 4 | <a title="5 times">How many times does the loop repeat?</a> |
+| 5 | <a title="5">What is the final value of `i` when the code exits?</a> |
+| 6 | Change the initial value of the variable `i` to `6` and step through. <a title="It never repeats">What do you notice?</a> |
+
+Let's now look at it more closely:
+
+```C++
+#include <stdio.h>
+
+int main()
+{
+    int i = 0;
+
+    printf("Start while loop\n");
+
+    do
+    {
+        printf("i = %d\n", i);
+        i = i + 1;              // Alternatively, write i++;
+    } while (i < 5);            //Repeat if condition is met
+
+    printf("Finished: i = %d\n", i);
+}
+```
+
+
+**Key Points:**
+
+1. The 'do - while loop' executes the code between the braces `{}` **at least once**. 
+2. The loop condition is then used to decide whether to repeat.
+
+| TASK |
+| - |
+| Now watch [this video](https://plymouth.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=44be4830-aa25-4afa-aafa-b09000e4fc0b) summarizing the function of a do-while loop |
+
+| Challenge |
+| - |
+| Modify the code to count from 5 down to zero |
+| A solution is provided |
+| |
+
+The output should appear as follows:
+
+```
+Start while loop
+i = 5
+i = 4
+i = 3
+i = 2
+i = 1
+i = 0
+Finished: i = -1
+```
+
+| TASK | 203-dowhile-getchar |
+| - | - |
+| 1. | Make 203-dowhile-getchar the start up project. Build and run. |
+| - | In the terminal, type a single key and then press the return key. Note the output |
+| 2. | New press the `q` key and press return, and the program should exit |
+| 3. | Uncomment line 17 and repeat |
+| - | <a title="Decimal 10">What is the ASCII code for the return key?</a> |
+| 4. | Now [watch the following video](https://plymouth.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=a5816fe7-92a1-4db8-858e-b09000e7486d) to ensure you understand this fully |
+| 5. | Can you modify the code so that the user can press `q` or `Q` to exit? |
+| Hint | A clue is to rephrase the question in terms of the *condition to repeat the code*. Repeat the code when the user input is not a `q` **and** not a `Q`. |
+| | Another way to think of it is the *condition to not exit* |
+| | A solution is provided |
+| 6. | Now [watch the follow debrief video](https://plymouth.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=6c895b7f-0e5b-4ac3-a35c-b09000e90883) |
+| |
+
+Remember we use the following *conditional operators* to build complex conditions.
+
+| Operator | Meaning | Type |
+| - | - | - |
+| `&&` | AND | Binary |
+| `\|\|` | OR | Binary |
+| `!` | NOT | Unary |
+| `==` | EQUALS | Binary |
+| `!=` | NOT EQUALS | Binary |
+
+Let's reflect on the task above, as it can be confusing. 
+
+* Remember that in a do-while loop, we provide a *condition to repeat* the code.
+* This is the logical opposite of the *condition to exit* the loop.
+
+Sometimes it is more natural / intuitive to think of the exit condition instead of the repeat condition. If so, that is fine. We can easily convert one to the other.
+
+> We can say that if `A` is the condition to *exit* the loop, then `!A` is the condition to *reenter* it.
+
+Breaking this down:
+
+1 First write down the condition to **exit** the loop: 
+
+`(userEnteredCharacter == 'q') || (userEnteredCharacter == 'Q')`
+
+2 Invert the logic to get the expression to **re-enter** the loop: 
+
+`!( (userEnteredCharacter == 'q') || (userEnteredCharacter == 'Q') )`
+
+### De-Morgan's Theorem
+
+We can actually take this further and re-write the expression in another form using something known as De-Morgan's Theorem. This allows us to remove the outer `!` operator, and might result in an expression that is more natural (matter of opinion).
+
+Start with the expression we wish to transform:
+
+`!( (userEnteredCharacter == 'q') || (userEnteredCharacter == 'Q') )`
+
+1 Invert the whole expression by removing the NOT (`!`)
+
+`(userEnteredCharacter == 'q') || (userEnteredCharacter == 'Q')`
+
+2 If the logical operator is an AND, make it an OR. If the operator is an OR, make it an AND.
+
+`(userEnteredCharacter == 'q') && (userEnteredCharacter == 'Q')`
+
+3 Finally, invert the logic of the parameters:
+
+`(userEnteredCharacter != 'q') && (userEnteredCharacter != 'Q')`
+
+So the condition to repeat the loop reads as follows:
+
+> "if `userEnteredCharacter` is not a `q` **and** `userEnteredCharacter` is not a `Q`, then repeat"
+
+| Challenge |
+| - |
+| Change the code above to use this AND based logic. Run the code to check it works. |
+| |
+
+For a more formal treatment, see https://en.wikipedia.org/wiki/De_Morgan%27s_laws
 
 ## While loop
 
-| Task | Details |
-| :--- | :--- |
-| 1 | As in previous labs, create a new project called "Looping" or similar, delete the comments and replace the code within the function main() with the following: |
+Similar is the while-loop. This was also covered in the lecture.
+
+| TASK | 205-while-loop |
+| - | - |
+| 1 | Make project 205-while-loop the start up project |  
+| 2 | Build, set a breakpoint and step through the code to see what it does |
+| 3 | <a title="5 times">How many times does the loop repeat?</a> |
+| 4 | <a title="5">What is the final value of `i` when the code exits?</a> |
+| 5 | Change the initial value of the variable `i` to `6` and step through. <a title="The code in the while loop block is never run">What do you notice that is different to the do-while loop?</a> |
+
+Let's now look at it more closely:
 
 ```C++
-int i = 0;
-
-printf("Start while loop\n");
-
-while (i < 5)
+int main()
 {
-    printf("i = %d\n", i);
-    i++;        // same as i = i + 1 but more concise;
+    int i = 0;
+
+    puts("Start while loop");
+
+    while (i < 5)
+    {
+        printf("i = %d\n", i);
+        i++;        // same as i = i + 1 but more concise;
+    }
+
+    printf("Exiting with i=%d\n", i);
 }
 
 ```
 
-| Task | Details |
-| :--- | :--- |
-| 2    |  In the code above the 'condition' that controls wether the code within the block (inside the {} brackets) is (i < 5). The variable i is assigned the value of 0 before the loop and will be incremented by 1 each time the code in the block is run. How many times do you think the loop will run? Run the program and observe the results. Try changing the value of i before the loop and change the 'less than' operator to 'less than or equals' (<=), what difference does this make? In all there are 6 comparison operators you can try.|
+Here are some more conditional operators:
 
-Here is a list:
 | Operator | Name  |
-| :--- | :--- |
+| - | - |
 | ==   |Equal to |
 | !=   | Not equal         |
 | >    | Greater than          |
@@ -35,27 +197,13 @@ Here is a list:
 | >=   | Greater than or equal to |
 | <=   | Less than or equal to         |
 
-## Do - while loop
+| TASK | 205-while-loop (continued) |
+| - | - |
+| 6 | Modify the code to count down from 10 to 0 is steps of 2 |
+| | A solution is provided |
+| 7 | Now [watch this de-brief video](https://plymouth.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=f25e602c-03e5-4b35-b6b4-b09000ef2ebc) |
+| |
 
-| Task | Details |
-| :--- | :--- |
-|   3 |  Change the code within main() to the following:  
-
-```C++
-int i = 0;
-
-printf("Start while loop\n");
-
-do
-{
-    printf("i = %d\n", i);
-    i++;        // same as i = i + 1 but more concise;
-} while (i < 5);
-```
-
-| Task | Details |
-| :--- | :--- |
-| 4    | The loop shown in the code above is called a 'do - while loop', as you can see it differs from the 'while loop' in that the test condition is at the end (note the semi-colon after the test). Also note that it always runs at least once. Run the program and observe the results, now change the initial value of the variable 'i' to 6 and see what happens. Which loop you choose to use depends on what you are trying to achieve, they both have their uses.
 
 ## For loop
 
