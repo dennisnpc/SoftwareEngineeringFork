@@ -21,16 +21,40 @@ int main()
 
     //Write solution here
 
+    int L = (int)input.length();
+    
+   for (int i = 0; i < L; i++)
+   {
+       if (isdigit(input[i]))
+       {
+            cout << input[i];
+        }
+    }
+   cout << endl << endl;
 
+    // Or
+
+   int start = input.find("\"") +1;
+   int finish = input.find("\"", start+1);
+
+   int length = finish - start;
+
+   string number = input.substr(start, length);
+   cout << number << endl;
 
     // Challenge 2 - word count
     // Type in a sentence, and count the number of time the words "the" appears 
     getline(std::cin, input);   //Read a line (users types this in)
     istringstream iss(input);   //Create a string "stream" (sequence of words)
     string word;                //This will hold the next word
+    int count = 0;
     while (iss >> word) {       //Read the next word (if there is one)
-        cout << word << endl;   //Output each word in turn
+        if (word == "the" || word == "The")
+        {
+            count++;
+        }
     }
+    cout << "Count = " << count << endl;   //Output count of "the"
 
 }
 
