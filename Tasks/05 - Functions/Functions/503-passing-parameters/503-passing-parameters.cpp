@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 void displayBanner(int stringLen)
@@ -9,22 +10,30 @@ void displayBanner(int stringLen)
 	cout << endl;
 }
 
-int main()
+void makeBanner(string message, int length)
 {
-	const string message = "Welcome to Computer Science";
-
-	//Get the length of the string
-	int L = message.length();			//L is now a LOCAL variable
-
 	//Write the banner above
-	displayBanner(L);
+	displayBanner(length);
 
 	cout << "* ";				//Leading *
 	cout << message;			//Message
 	cout << " *" << endl;		//Trailing *
 
 	//Write the banner below
-	displayBanner(L);
+	displayBanner(length);
+}
+
+int main()
+{
+	//Type in message
+	string message;
+	getline(cin, message);
+
+	//Get the length of the string
+	int L = message.length();			//L is now a LOCAL variable
+
+	cout << endl;
+	makeBanner(message, L);
 
 	//Tell the calling shell all is well
 	return 0;
