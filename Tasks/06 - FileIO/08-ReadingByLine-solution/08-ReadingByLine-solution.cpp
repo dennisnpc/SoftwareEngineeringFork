@@ -31,7 +31,7 @@ int main()
 
     //Now add on the the allLines string
     if (inputStream.fail() == false) {
-        cout << "Read in the line: " << nextLine;
+        cout << "Read in the line: " << nextLine << endl;
         allLines = allLines + nextLine + "\n";
     }
     else {
@@ -45,6 +45,7 @@ int main()
 
         //Did we successfully read a line?
         if (!inputStream.fail()) {
+            cout << "Just read: " << nextLine << endl;
             //If so, append to the string `allLines` and add a newline character on the end
             allLines = allLines + nextLine + "\n";
         }

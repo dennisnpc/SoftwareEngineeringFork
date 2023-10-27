@@ -72,6 +72,19 @@ int main()
         cout << "Oops - could not find it" << endl;
     }
 
+    // My work
+    string regexPattern = "Subject\\s+\\w+:\\s+(\\w+)";
+    regex regexRule(regexPattern);
+    smatch myMatch;
+    if (regex_search(dataString, myMatch, regexRule))
+    {
+        cout << "The word you are looking for is: " << myMatch[1] << endl;
+    }
+    else
+    {
+        cout << "Word not found." << endl;
+    }
+
     // Done
     cout << "All is well!" << endl;
     return 0;

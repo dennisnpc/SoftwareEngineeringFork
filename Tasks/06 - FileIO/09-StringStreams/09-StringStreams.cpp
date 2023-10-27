@@ -41,6 +41,34 @@ int main()
         }
     }
 
+    cout << "\n";
+
+    istringstream myInput(sentence);
+    int counter = 0;
+    while (myInput.eof() == false)
+    {
+        myInput >> nextWord;
+        if (myInput.fail())
+        {
+            cout << "Failed to read next word" << endl;
+            return -1; // Would probably want to "continue;" to skip the rest of the while loop for the failed read, but the rest of the while loop is empty anyway
+        }
+        else
+        {
+            if (nextWord != "Always.")
+            {
+                cout << nextWord << endl;
+                counter++;
+            }
+            else
+            {
+                cout << nextWord << endl << endl;
+                counter++;
+            }
+        }
+    }
+    cout << "Number of words: " << counter << endl;
+
     //Final check - did we read an EOF character? This can happen when we read the last word or beyond it (space or newline)
     if (iss.eof()) {
         cout << "We reached the end of the file" << endl;

@@ -64,6 +64,11 @@ int main()
         return -1;
     }
 
+    // Find pos of "Area:"          Create substr from pos to end           Display substr
+    int position = dataString.find("Area:");
+    string substring = dataString.substr(position);
+    cout << endl << "The substring is: " << substring << endl;
+
     // Done
     cout << "All is well!" << endl;
     return 0;
