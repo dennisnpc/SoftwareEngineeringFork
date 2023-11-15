@@ -89,6 +89,19 @@ namespace COMP1000 {
         void display() {
             cout << fileName << ", Width: " << width << ", Height: " << height << ", Area: " << area << endl;
         }
+
+        void updateArea(int w, int h)
+        {
+            width = w;
+            height = h;
+
+            //Recalculate
+            area = width * height;
+            //Log
+            if (outputStream.is_open()) {
+                outputStream << "width: " << width << ", height: " << height << ", area: " << area << endl;
+            }
+        }
     };
 }
 

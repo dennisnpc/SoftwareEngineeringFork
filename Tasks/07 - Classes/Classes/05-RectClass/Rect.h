@@ -39,6 +39,13 @@ public:
         std::cout << "Width: " << width << ", Height: " << height << ", Area: " << area << std::endl;
     }
 
+    //Setter for width
+    void setWidth(float w) {
+        if (width != w) {
+            width = w;
+            updateArea();
+        }
+    }
 };
 
 
