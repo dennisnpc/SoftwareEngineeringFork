@@ -27,6 +27,17 @@ public:
         //Read only copy returned as = does a copy for string
         return _name;
     }
+
+    void setAge(int age) {
+        if ((_age != age) && (age <= 0) && (age <= 30)) {
+            cout << "Age changed from " << _age << "to " << age << endl;
+            _age = age;
+        }
+    }
+
+    int getAge() {
+        return _age;
+    }
 };
 
 

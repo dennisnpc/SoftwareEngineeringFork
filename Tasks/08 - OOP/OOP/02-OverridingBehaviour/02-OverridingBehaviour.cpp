@@ -75,7 +75,19 @@ public:
 
 
 // Write solution here
+class Tortoise : public Pet {
+public:
+    Tortoise(string name, int age) : Pet(name, age) {
 
+    }
+    void setAge(int a) {
+        //Only update if in range.
+        if ((a >= 0) && (a <= 250)) {
+            cout << "Changing the age of " << _name << " from " << _age << " to " << a << endl;
+            _age = a;
+        }
+    }
+};
 
 
 int main()

@@ -31,7 +31,10 @@ public:
     // For a list of items
     void addCharge(vector<float> costs) {
         //COMPLETE THIS
-
+        for (int i = 0; i < costs.size(); i++)
+        {
+            addCharge(costs[i]);
+        }
     }
 
     //Generate a statement to send to the customer
