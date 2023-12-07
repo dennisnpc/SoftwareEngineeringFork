@@ -19,6 +19,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    void PleaseWork(int);
 
 };
 #endif // MAINWINDOW_H

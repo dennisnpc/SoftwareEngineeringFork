@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
+#include <QClipboard>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -9,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::doButtonClick);
     connect(ui->actionWise_Saying, &QAction::triggered, this, &MainWindow::doWiseSayingMenuClicked);
+    connect(ui->actionPaste, &QAction::triggered, this, &MainWindow::pasteFromClipboard);
 }
 
 MainWindow::~MainWindow()
@@ -24,4 +26,12 @@ void MainWindow::doButtonClick(bool b)
 void MainWindow::doWiseSayingMenuClicked()
 {
     ui->labelMessage->setText("Live Long and Prosper");
+}
+
+void MainWindow::pasteFromClipboard()
+{
+    QString str = QApplication::clipboard()->text();
+    if (!str.isEmpty()) {
+        ui->labelMessage->setText(str);
+    }
 }

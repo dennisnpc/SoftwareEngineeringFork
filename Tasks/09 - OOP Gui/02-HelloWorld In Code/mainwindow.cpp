@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::catPushButtonClicked);
 }
 
 MainWindow::~MainWindow()
@@ -13,3 +14,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::catPushButtonClicked(bool b)
+{
+    ui->labelMessage->setText("Meow");
+}
